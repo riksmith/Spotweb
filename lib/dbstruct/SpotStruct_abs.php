@@ -708,6 +708,7 @@ abstract class SpotStruct_abs {
 
 		# ---- Indexes on commentsfull ----
 		$this->validateIndex("idx_commentsfull_1", "UNIQUE", "commentsfull", array("messageid"));
+		$this->validateIndex("idx_commentsfull_2", "", "commentsfull", array("stamp"));
 
 		# ---- Indexes on commentsxover ----
 		$this->validateIndex("idx_commentsxover_1", "UNIQUE", "commentsxover", array("messageid"));
