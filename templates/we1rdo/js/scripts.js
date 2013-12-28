@@ -963,7 +963,7 @@ function addText(text,element_id) {
 function removeFilter(href, fieldname, operator, booloper, value) {
 	href = unescape(href).replace(/\+/g, ' ');
 
-	return href.replace('search[value][]=' + fieldname + ':' + operator + ':' + booloper + ':' + value, '');
+	return href.replace('search[value][]=' + fieldname + ':' + operator + ':' + value, '');
 } // removeFilter	
 
 /*
