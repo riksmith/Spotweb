@@ -149,6 +149,11 @@ class SpotPage_newznabapi extends SpotPage_Abs {
 
                 // and search for the text 'Season ' ...
                 $searchParams['value'][] = "Titel:=:OR:+\"" . $tvRageInfo->getTitle() . "\" +\"Season " . (int) $this->_params['season'] . "\"";
+                // imdb sometimes returns the title translated, if so, pass the original title as well
+                if ($tvRageInfo->getAlternateTitle() != null) {
+                    $searchParams['value'][] = "Titel:=:OR:+\"" . $tvRageInfo->getAlternateTitle() . "\" +\"Season " . (int) $this->_params['season'] . "\"";
+                }
+                
             } # else
 
 			/*
@@ -157,8 +162,14 @@ class SpotPage_newznabapi extends SpotPage_Abs {
 			 * We search both for S04E17 and S04 E17 (with a space)
 			 */
 			$searchParams['value'][] = "Titel:=:OR:+\"" . $tvRageInfo->getTitle() . "\" +" . $seasonSearch . $episodeSearch;
+                        if ($tvRageInfo->getAlternateTitle() != null) {
+                            $searchParams['value'][] = "Titel:=:OR:+\"" . $tvRageInfo->getAlternateTitle() . "\" +" . $seasonSearch . $episodeSearch;
+                        }
             if (!empty($episodeSearch)) {
                 $searchParams['value'][] = "Titel:=:OR:+\"" . $tvRageInfo->getTitle() . "\" +" . $seasonSearch . ' +' . $episodeSearch;
+                if ($tvRageInfo->getAlternateTitle() != null) {
+                    $searchParams['value'][] = "Titel:=:OR:+\"" . $tvRageInfo->getAlternateTitle() . "\" +" . $seasonSearch . ' +' . $episodeSearch;
+                }
             } # if
 		} elseif ($this->_params['t'] == "music") {
 			if (empty($this->_params['artist']) && empty($this->_params['cat'])) {
