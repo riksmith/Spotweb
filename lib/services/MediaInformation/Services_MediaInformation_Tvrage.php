@@ -41,6 +41,7 @@ class Services_MediaInformation_Tvrage extends Services_MediaInformation_Abs {
         $origTitle = $showTitle->item(0)->nodeValue;
         $mediaInfo->setTitle($origTitle);
         $strippedTitle = str_replace("'", "",$origTitle);
+        $strippedTitle = str_replace(":", "",$strippedTitle);
         $strippedTitle = str_replace(" - ", " ",$strippedTitle);
         if ($origTitle != $strippedTitle) {
             $mediaInfo->setAlternateTitle($strippedTitle);
