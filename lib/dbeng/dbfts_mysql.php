@@ -279,6 +279,8 @@ class dbfts_mysql extends dbfts_abs {
                     $filteredTerm = trim($splittedTerm, "\"");
                     $filteredTerm = ltrim($filteredTerm, "+-~<>");
                     $filteredTerm = rtrim($filteredTerm, "*");
+                    $replacements = array(" ", ".");
+                    $filteredTerm = str_replace($replacements, "_",$filteredTerm);
 
                     if (!empty($filteredTerm)) {
                         $queryPart[] = ' ' . $field . " LIKE " . $this->_db->safe('%' . $filteredTerm . '%');
