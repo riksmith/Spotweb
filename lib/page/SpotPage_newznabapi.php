@@ -389,7 +389,8 @@ class SpotPage_newznabapi extends SpotPage_Abs {
 				$guid->setAttribute('isPermaLink', 'false');
 
 				$item = $doc->createElement('item');
-				$item->appendChild($doc->createElement('title', htmlspecialchars($spot['title'], ENT_QUOTES, "UTF-8")));
+                                $decodedTitle = html_entity_decode($spot['title'], ENT_QUOTES, "UTF-8");
+				$item->appendChild($doc->createElement('title', htmlspecialchars($decodedTitle, ENT_NOQUOTES, "UTF-8")));
 				$item->appendChild($guid);
 				$item->appendChild($doc->createElement('link', $nzbUrl));
 				$item->appendChild($doc->createElement('pubDate', date('r', $spot['stamp'])));
