@@ -343,7 +343,7 @@ abstract class SpotStruct_abs {
 		$this->createTable('spots', "utf8"); 
 		$this->validateColumn('messageid', 'spots', 'VARCHAR(128)', "''", true, 'ascii');
 		$this->validateColumn('poster', 'spots', 'VARCHAR(128)', NULL, false, 'utf8');
-		$this->validateColumn('title', 'spots', 'VARCHAR(128)', NULL, false, 'utf8');
+		$this->validateColumn('title', 'spots', 'VARCHAR(250)', NULL, false, 'utf8');
 		$this->validateColumn('tag', 'spots', 'VARCHAR(128)', NULL, false, 'utf8');
 		$this->validateColumn('category', 'spots', 'INTEGER', NULL, false, '');
 		$this->validateColumn('subcata', 'spots', 'VARCHAR(64)', NULL, false, 'ascii'); 
@@ -717,6 +717,7 @@ abstract class SpotStruct_abs {
 
 		# ---- Indexes on commentsfull ----
 		$this->validateIndex("idx_commentsfull_1", "UNIQUE", "commentsfull", array("messageid"));
+		$this->validateIndex("idx_commentsfull_2", "", "commentsfull", array("stamp"));
 
 		# ---- Indexes on commentsxover ----
 		$this->validateIndex("idx_commentsxover_1", "UNIQUE", "commentsxover", array("messageid"));
