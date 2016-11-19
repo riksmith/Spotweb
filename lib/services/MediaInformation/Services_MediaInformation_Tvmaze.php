@@ -41,7 +41,14 @@ class Services_MediaInformation_Tvmaze extends Services_MediaInformation_Abs {
         /*
          * Get the actual episode title
          */
-        $mediaInfo->setTitle($jsonoutp->{'name'});
+        $origTitle = $jsonoutp->{'name'};
+        $mediaInfo->setTitle($origTitle);
+        $strippedTitle = str_replace("'", "",$origTitle);
+        $strippedTitle = str_replace(":", "",$strippedTitle);
+        $strippedTitle = str_replace(" - ", " ",$strippedTitle);
+        if ($origTitle != $strippedTitle) {
+            $mediaInfo->setAlternateTitle($strippedTitle);
+        }
 
         $mediaInfo->setValid(true);
         return $mediaInfo;

@@ -37,8 +37,15 @@ class Services_MediaInformation_Tvrage extends Services_MediaInformation_Abs {
         /*
          * Get the actual episode title
          */
-        $mediaInfo->setTitle($showTitle->item(0)->nodeValue);
-
+        //$mediaInfo->setTitle($showTitle->item(0)->nodeValue);
+        $origTitle = $showTitle->item(0)->nodeValue;
+        $mediaInfo->setTitle($origTitle);
+        $strippedTitle = str_replace("'", "",$origTitle);
+        $strippedTitle = str_replace(":", "",$strippedTitle);
+        $strippedTitle = str_replace(" - ", " ",$strippedTitle);
+        if ($origTitle != $strippedTitle) {
+            $mediaInfo->setAlternateTitle($strippedTitle);
+        }
         $mediaInfo->setValid(true);
         return $mediaInfo;
     } # retrieveInfo
